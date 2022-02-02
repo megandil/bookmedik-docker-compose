@@ -1,0 +1,32 @@
+version: "3.1"
+
+services:
+  ddbb:
+    container_name: mariadb
+    image: mariadb
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_USER: bookmedik
+      MARIADB_PASSWORD: bookmedik
+      MARIADB_DATABASE: bookmedik
+    volumes:
+      - /home/daniel/volumenes_docker/mariadb:/var/lib/mysql
+
+  bookmedik:
+    container_name: bookmedik
+    image: megandil/bookmedik:v1
+    restart: always
+    environment:
+      BK_USER: bookmedik
+      BK_PASSWORD: bookmedik
+      BK_HOST: mariadb
+      BK_BD: bookmedik
+    ports:
+      - 80:80
+    depends_on:
+      - ddbb
+    volumes:
+      - vol_bookmedik:/var/www/html
+volumes:
+  vol_bookmedik:

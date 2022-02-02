@@ -27,6 +27,6 @@ services:
     depends_on:
       - ddbb
     volumes:
-      - vol_bookmedik:/var/www/html
+      - vol_log:/var/log/apache2
 volumes:
-  vol_bookmedik:
+  vol_log:
